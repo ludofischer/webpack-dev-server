@@ -803,11 +803,7 @@ describe("API", () => {
     it("should throw the error when the port isn't found", async () => {
       expect.assertions(1);
 
-      jest.mock("portfinder", () => {
-        return {
-          getPortPromise: () => Promise.reject(new Error("busy")),
-        };
-      });
+      jest.mock("get-port", () => () => Promise.reject(new Error("busy")));
 
       process.env.WEBPACK_DEV_SERVER_PORT_RETRY = 1;
 
